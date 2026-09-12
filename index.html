@@ -25,6 +25,7 @@
   body{font-family:'Poppins',sans-serif;background:var(--bg);color:var(--dark);overflow-x:hidden;}
   a{text-decoration:none;color:inherit;}
   ul{list-style:none;}
+  img{max-width:100%;display:block;}
   .heading-font{font-family:'Playfair Display',serif;}
   .script-font{font-family:'Caveat',cursive;}
 
@@ -38,23 +39,37 @@
   .logo-icon{
     width:38px;height:38px;border-radius:12px;
     background:linear-gradient(135deg,var(--pink-1),var(--pink-2));
-    display:flex;align-items:center;justify-content:center;color:#fff;font-size:16px;
+    display:flex;align-items:center;justify-content:center;color:#fff;font-size:16px;flex-shrink:0;
   }
   .logo-text h1{font-size:18px;color:var(--pink-1);font-weight:800;line-height:1.1;letter-spacing:.3px;}
   .logo-text span{font-size:10px;color:var(--gray);font-weight:500;}
   .nav-links{display:flex;gap:30px;}
   .nav-links li a{
     display:flex;align-items:center;gap:6px;font-weight:600;font-size:14px;
-    color:var(--dark);transition:.25s;
+    color:var(--dark);transition:.25s;white-space:nowrap;
   }
   .nav-links li a i{font-size:13px;color:var(--dark);}
   .nav-links li a:hover{color:var(--pink-1);}
   .nav-btn{
     background:linear-gradient(135deg,var(--pink-1),var(--pink-2));
     color:#fff;padding:11px 22px;border-radius:50px;font-weight:600;font-size:13.5px;
-    display:flex;align-items:center;gap:7px;box-shadow:0 6px 15px rgba(255,61,143,.35);
+    display:flex;align-items:center;gap:7px;box-shadow:0 6px 15px rgba(255,61,143,.35);white-space:nowrap;
   }
-  .menu-toggle{display:none;font-size:20px;color:var(--pink-1);cursor:pointer;}
+  .menu-toggle{display:none;font-size:20px;color:var(--pink-1);cursor:pointer;background:none;border:none;}
+
+  /* MOBILE NAV DROPDOWN */
+  .mobile-nav{
+    display:none;position:absolute;top:100%;left:0;right:0;background:#fff;
+    flex-direction:column;padding:10px 20px 20px;box-shadow:0 10px 20px rgba(0,0,0,0.08);
+    z-index:999;
+  }
+  .mobile-nav.show{display:flex;}
+  .mobile-nav a{
+    padding:14px 0;font-weight:600;font-size:14.5px;border-bottom:1px solid #f5eef1;
+    display:flex;align-items:center;gap:10px;color:var(--dark);
+  }
+  .mobile-nav a:last-child{border-bottom:none;}
+  .mobile-nav a i{color:var(--pink-1);width:18px;}
 
   /* ===== HERO ===== */
   .hero{
@@ -172,7 +187,7 @@
     max-width:1160px;margin:0 auto 36px;}
   .filter-tabs{display:flex;gap:8px;flex-wrap:wrap;}
   .filter-tab{padding:9px 20px;border-radius:50px;font-size:13px;font-weight:600;
-    background:#fff;color:var(--dark);cursor:pointer;border:1px solid #f2dde6;transition:.25s;}
+    background:#fff;color:var(--dark);cursor:pointer;border:1px solid #f2dde6;transition:.25s;user-select:none;}
   .filter-tab.active{background:linear-gradient(135deg,var(--pink-1),var(--pink-2));color:#fff;border-color:transparent;}
   .search-box{display:flex;align-items:center;gap:8px;background:#fff;padding:10px 18px;
     border-radius:50px;border:1px solid #f2dde6;min-width:230px;}
@@ -207,17 +222,17 @@
   .price-left div span{font-size:10.5px;color:var(--gray);}
   .price-right{display:flex;align-items:center;gap:7px;}
   .price-right b{color:var(--pink-1);font-size:14.5px;font-weight:700;}
-  .tag-mini{font-size:9px;font-weight:700;padding:3px 9px;border-radius:20px;color:#fff;}
+  .tag-mini{font-size:9px;font-weight:700;padding:3px 9px;border-radius:20px;color:#fff;white-space:nowrap;}
   .tag-hemat{background:#ff3d8f;}
   .tag-promo{background:#ff8fb8;}
   .tag-best{background:#ffa53d;}
 
-  .stock-row{display:flex;justify-content:space-between;align-items:center;margin-top:auto;}
-  .stock-status{display:flex;align-items:center;gap:6px;font-size:11.5px;color:#2fbe6e;font-weight:600;}
+  .stock-row{display:flex;justify-content:space-between;align-items:center;margin-top:auto;gap:10px;}
+  .stock-status{display:flex;align-items:center;gap:6px;font-size:11.5px;color:#2fbe6e;font-weight:600;white-space:nowrap;}
   .stock-status i{font-size:7px;}
   .buy-btn{background:linear-gradient(135deg,var(--pink-1),var(--pink-2));color:#fff;
     padding:10px 20px;border-radius:50px;font-size:12.5px;font-weight:700;
-    display:flex;align-items:center;gap:6px;border:none;cursor:pointer;box-shadow:0 6px 14px rgba(255,61,143,.3);}
+    display:flex;align-items:center;gap:6px;border:none;cursor:pointer;box-shadow:0 6px 14px rgba(255,61,143,.3);white-space:nowrap;}
 
   /* ===== CARA ORDER ===== */
   .cara-order{background:linear-gradient(180deg,#ffe9f1,#ffdcea);padding:60px 40px;position:relative;overflow:hidden;}
@@ -233,13 +248,14 @@
     box-shadow:var(--shadow);position:relative;}
   .step-num{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,var(--pink-1),var(--pink-2));
     color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;
-    position:absolute;top:-19px;left:50%;transform:translateX(-50%);box-shadow:0 6px 14px rgba(255,61,143,.4);}
+    position:absolute;top:-19px;left:50%;transform:translateX(-50%);box-shadow:0 6px 14px rgba(255,61,143,.4);flex-shrink:0;}
   .step-num-text{font-size:22px;font-weight:800;color:#ffd3e6;margin:14px 0 6px;}
   .step-card i.step-icon{font-size:19px;color:var(--pink-1);margin-bottom:8px;display:block;}
   .step-card h4{font-size:13.5px;margin-bottom:6px;font-weight:700;}
   .step-card p{font-size:11.5px;color:var(--gray);line-height:1.5;}
   .step-arrow{position:absolute;top:50%;right:-19px;transform:translateY(-50%);color:var(--pink-1);
     font-size:16px;z-index:4;}
+  .step-card-content{width:100%;}
 
   /* ===== TESTIMONI ===== */
   .testimoni{padding:60px 40px;}
@@ -247,7 +263,7 @@
   .testi-card{background:#fff;border:1px solid #f5e5ea;border-radius:16px;padding:22px;}
   .testi-top{display:flex;align-items:center;gap:12px;margin-bottom:10px;}
   .avatar{width:42px;height:42px;border-radius:50%;background:var(--pink-light);
-    display:flex;align-items:center;justify-content:center;color:var(--pink-1);font-size:17px;}
+    display:flex;align-items:center;justify-content:center;color:var(--pink-1);font-size:17px;flex-shrink:0;}
   .testi-top h4{font-size:14px;font-weight:700;}
   .stars{color:#ffb63d;font-size:11.5px;}
   .testi-card p{font-size:13px;color:var(--gray);line-height:1.6;font-style:italic;}
@@ -261,8 +277,8 @@
   .faq-q{display:flex;justify-content:space-between;align-items:center;gap:10px;font-size:13.5px;font-weight:700;cursor:pointer;}
   .faq-q-left{display:flex;align-items:center;gap:8px;}
   .faq-q i.q-icon{color:var(--pink-1);font-size:14px;}
-  .faq-q i.chev{transition:.3s;color:var(--pink-1);font-size:11px;}
-  .faq-item.open .chev{transform:rotate(180deg);}
+  .faq-q i.chev{transition:.3s;color:var(--pink-1);font-size:11px;flex-shrink:0;}
+  .faq-item.closed .chev{transform:rotate(180deg);}
   .faq-answer{max-height:200px;overflow:hidden;transition:.3s;font-size:12px;color:var(--gray);
     line-height:1.6;margin-top:10px;}
   .faq-item.closed .faq-answer{max-height:0;margin-top:0;}
@@ -274,7 +290,7 @@
   .footer-links{display:flex;gap:26px;flex-wrap:wrap;font-size:13px;font-weight:500;}
   .footer-social{display:flex;gap:10px;align-items:center;}
   .footer-social a{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;
-    justify-content:center;color:#fff;font-size:14px;}
+    justify-content:center;color:#fff;font-size:14px;flex-shrink:0;}
   .sc-ig{background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);}
   .sc-tt{background:#000;}
   .sc-wa{background:#25D366;}
@@ -283,21 +299,119 @@
   .footer-bottom{text-align:center;padding-top:16px;border-top:1px solid #ffe0ec;font-size:11.5px;color:var(--gray);}
   .footer-bottom .made{color:var(--pink-1);font-style:italic;}
 
-  @media(max-width:900px){
+  /* ============================================
+     RESPONSIVE - TABLET (max 1024px)
+     ============================================ */
+  @media(max-width:1024px){
+    .hero-grid{grid-template-columns:1fr;gap:40px;}
+    .hero-text{text-align:center;}
+    .hero-text p{margin:0 auto 26px;}
+    .hero-btns{justify-content:center;}
+    .hero-badges{justify-content:center;}
+    .hero-illustration{height:320px;transform:scale(0.85);margin:0 auto;}
+    .navbar{padding:14px 24px;}
+    .nav-links{gap:20px;}
+    .product-grid{grid-template-columns:repeat(2,1fr);}
+    .features-card{grid-template-columns:repeat(2,1fr);}
+    .feature-item{border-right:1px solid #f7e6ee;}
+    .feature-item:nth-child(2n){border-right:none;}
+    .feature-item:nth-child(n+3){border-top:1px solid #f7e6ee;}
+    .steps-row{grid-template-columns:repeat(2,1fr);gap:30px 14px;}
+    .step-arrow{display:none;}
+    .deco-left{font-size:60px;opacity:.5;}
+    .deco-right{display:none;}
+    .testi-grid{grid-template-columns:repeat(2,1fr);}
+    .faq-list{grid-template-columns:repeat(2,1fr);}
+  }
+
+  /* ============================================
+     RESPONSIVE - MOBILE (max 768px)
+     ============================================ */
+  @media(max-width:768px){
+    .navbar{padding:12px 18px;position:relative;}
     .nav-links{display:none;}
     .menu-toggle{display:block;}
-    .hero-grid{grid-template-columns:1fr;}
-    .hero-illustration{display:none;}
-    .features-card{grid-template-columns:repeat(2,1fr);}
-    .feature-item{border-right:none;border-bottom:1px solid #f5e5ea;}
-    .product-grid{grid-template-columns:1fr;}
-    .steps-row{grid-template-columns:repeat(2,1fr);}
-    .step-arrow{display:none;}
+    .nav-btn span{display:none;}
+    .nav-btn{padding:10px 14px;}
+    .logo-text h1{font-size:16px;}
+    .logo-text span{font-size:9px;}
+
+    .hero{padding:36px 20px 40px;}
+    .hero-text h1{font-size:36px;}
+    .hero-text h2{font-size:20px;}
+    .hero-text p{font-size:13.5px;padding:0 10px;}
+    .hero-tag{font-size:11px;padding:6px 12px;}
+    .btn{padding:11px 20px;font-size:13px;}
+    .hero-btns{flex-direction:column;align-items:stretch;}
+    .hero-btns .btn{justify-content:center;}
+    .badge-pill{font-size:11px;padding:7px 12px;}
+
+    .hero-illustration{height:260px;transform:scale(0.65);margin-top:-20px;}
+
+    .features-wrap{margin:-15px auto 40px;}
+    .features-card{grid-template-columns:1fr;border-radius:16px;}
+    .feature-item{border-right:none!important;border-top:none!important;border-bottom:1px solid #f7e6ee;padding:18px 20px;}
+    .feature-item:last-child{border-bottom:none;}
+    .feature-icon{width:40px;height:40px;font-size:16px;}
+    .feature-item h4{font-size:13px;}
+    .feature-item p{font-size:11px;}
+
+    .section-title h2{font-size:24px;}
+    .section-title p{font-size:13px;padding:0 20px;}
+    .section-tag{font-size:11px;}
+
+    .products{padding:0 18px 50px;}
+    .filter-row{flex-direction:column;align-items:stretch;}
+    .filter-tabs{display:flex;overflow-x:auto;padding-bottom:8px;-webkit-overflow-scrolling:touch;scrollbar-width:none;}
+    .filter-tabs::-webkit-scrollbar{display:none;}
+    .filter-tab{flex-shrink:0;font-size:12.5px;padding:8px 16px;}
+    .search-box{width:100%;}
+    .product-grid{grid-template-columns:1fr;gap:16px;}
+    .product-card{padding:18px;}
+    .header-badge{font-size:9px;padding:4px 10px;top:14px;right:14px;}
+    .product-top{padding-right:60px;}
+    .product-logo{width:44px;height:44px;font-size:20px;}
+    .product-top h3{font-size:14px;}
+    .product-top p{font-size:11px;}
+    .buy-btn{font-size:11.5px;padding:9px 16px;}
+
+    .cara-order{padding:40px 18px;}
     .deco-left,.deco-right{display:none;}
-    .testi-grid{grid-template-columns:1fr;}
-    .faq-list{grid-template-columns:1fr;}
-    .hero-text h1{font-size:38px;}
-    .hero-text h2{font-size:24px;}
+    .steps-row{grid-template-columns:1fr;gap:16px;max-width:400px;margin:0 auto;}
+    .step-card{padding:20px 16px 16px;text-align:left;display:flex;align-items:flex-start;gap:14px;}
+    .step-num{position:static;transform:none;flex-shrink:0;margin-top:2px;}
+    .step-num-text{display:none;}
+
+    .testimoni{padding:40px 18px;}
+    .testi-grid{grid-template-columns:1fr;gap:14px;}
+    .testi-card{padding:18px;}
+
+    .faq{padding:0 18px 50px;}
+    .faq-header{flex-direction:column;align-items:center;text-align:center;}
+    .faq-header .section-title{text-align:center;}
+    .faq-list{grid-template-columns:1fr;gap:14px;}
+    .faq-item{padding:16px 18px;}
+    .faq-q{font-size:13px;}
+
+    footer{padding:30px 18px 16px;}
+    .footer-top{flex-direction:column;text-align:center;gap:20px;}
+    .footer-links{justify-content:center;gap:16px;font-size:12px;}
+    .footer-bottom{font-size:11px;}
+  }
+
+  /* ============================================
+     RESPONSIVE - SMALL MOBILE (max 400px)
+     ============================================ */
+  @media(max-width:400px){
+    .hero-text h1{font-size:30px;}
+    .hero-text h2{font-size:17px;}
+    .hero-illustration{transform:scale(0.55);height:220px;}
+    .logo-text span{display:none;}
+    .feature-item{padding:14px 16px;}
+    .product-card{padding:14px;}
+    .price-item{font-size:12px;}
+    .price-right b{font-size:13px;}
+    .stock-row{flex-wrap:wrap;}
   }
 </style>
 </head>
@@ -316,8 +430,16 @@
     <li><a href="#faq"><i class="fa-solid fa-circle-question"></i> FAQ</a></li>
     <li><a href="#"><i class="fa-solid fa-file-lines"></i> Riwayat Pesanan</a></li>
   </ul>
-  <a href="#" class="nav-btn"><i class="fa-solid fa-user"></i> Masuk / Cek Pesanan</a>
-  <div class="menu-toggle"><i class="fa-solid fa-bars"></i></div>
+  <a href="#" class="nav-btn"><i class="fa-solid fa-user"></i> <span>Masuk / Cek Pesanan</span></a>
+  <button class="menu-toggle" id="menuToggle"><i class="fa-solid fa-bars"></i></button>
+
+  <div class="mobile-nav" id="mobileNav">
+    <a href="#"><i class="fa-solid fa-house"></i> Home</a>
+    <a href="#produk"><i class="fa-solid fa-bag-shopping"></i> Produk</a>
+    <a href="#cara-order"><i class="fa-solid fa-file-lines"></i> Cara Order</a>
+    <a href="#faq"><i class="fa-solid fa-circle-question"></i> FAQ</a>
+    <a href="#"><i class="fa-solid fa-clock-rotate-left"></i> Riwayat Pesanan</a>
+  </div>
 </header>
 
 <!-- HERO -->
@@ -467,10 +589,45 @@
     <p>Hanya 4 langkah, pesanan kamu langsung diproses.</p>
   </div>
   <div class="steps-row">
-    <div class="step-card"><div class="step-num">01</div><div class="step-num-text">01</div><i class="fa-solid fa-cart-shopping step-icon"></i><h4>Pilih Produk</h4><p>Pilih aplikasi & paket yang kamu inginkan.</p><i class="fa-solid fa-arrow-right step-arrow"></i></div>
-    <div class="step-card"><div class="step-num">02</div><div class="step-num-text">02</div><i class="fa-solid fa-credit-card step-icon"></i><h4>Lakukan Pembayaran</h4><p>Transfer sesuai metode yang tersedia.</p><i class="fa-solid fa-arrow-right step-arrow"></i></div>
-    <div class="step-card"><div class="step-num">03</div><div class="step-num-text">03</div><i class="fa-solid fa-paper-plane step-icon"></i><h4>Kirim Bukti Pembayaran</h4><p>Upload bukti pembayaran melalui form.</p><i class="fa-solid fa-arrow-right step-arrow"></i></div>
-    <div class="step-card"><div class="step-num">04</div><div class="step-num-text">04</div><i class="fa-solid fa-box-open step-icon"></i><h4>Akun/Kode Dikirim</h4><p>Pesanan akan diproses dan dikirim secepatnya.</p></div>
+    <div class="step-card">
+      <div class="step-num">01</div>
+      <div class="step-card-content">
+        <div class="step-num-text">01</div>
+        <i class="fa-solid fa-cart-shopping step-icon"></i>
+        <h4>Pilih Produk</h4>
+        <p>Pilih aplikasi & paket yang kamu inginkan.</p>
+      </div>
+      <i class="fa-solid fa-arrow-right step-arrow"></i>
+    </div>
+    <div class="step-card">
+      <div class="step-num">02</div>
+      <div class="step-card-content">
+        <div class="step-num-text">02</div>
+        <i class="fa-solid fa-credit-card step-icon"></i>
+        <h4>Lakukan Pembayaran</h4>
+        <p>Transfer sesuai metode yang tersedia.</p>
+      </div>
+      <i class="fa-solid fa-arrow-right step-arrow"></i>
+    </div>
+    <div class="step-card">
+      <div class="step-num">03</div>
+      <div class="step-card-content">
+        <div class="step-num-text">03</div>
+        <i class="fa-solid fa-paper-plane step-icon"></i>
+        <h4>Kirim Bukti Pembayaran</h4>
+        <p>Upload bukti pembayaran melalui form.</p>
+      </div>
+      <i class="fa-solid fa-arrow-right step-arrow"></i>
+    </div>
+    <div class="step-card">
+      <div class="step-num">04</div>
+      <div class="step-card-content">
+        <div class="step-num-text">04</div>
+        <i class="fa-solid fa-box-open step-icon"></i>
+        <h4>Akun/Kode Dikirim</h4>
+        <p>Pesanan akan diproses dan dikirim secepatnya.</p>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -539,17 +696,14 @@
 </footer>
 
 <script>
-  document.querySelectorAll('.faq-item').forEach(item=>{
-    item.classList.add('closed'); // default? screenshot shows open, so remove this line if want default open
-  });
-  // Default OPEN sesuai screenshot — jadi kita hapus class closed
-  document.querySelectorAll('.faq-item').forEach(item=>item.classList.remove('closed'));
+  // FAQ Accordion - default terbuka
   document.querySelectorAll('.faq-q').forEach(q=>{
     q.addEventListener('click',()=>{
       q.closest('.faq-item').classList.toggle('closed');
     });
   });
 
+  // Filter kategori produk
   const tabs = document.querySelectorAll('.filter-tab');
   const cards = document.querySelectorAll('.product-card');
   tabs.forEach(tab=>{
@@ -562,16 +716,30 @@
       });
     });
   });
+
+  // Search produk
   document.getElementById('searchInput').addEventListener('input', function(){
     const val = this.value.toLowerCase();
     cards.forEach(card=>{
       card.style.display = card.dataset.name.includes(val) ? 'flex' : 'none';
     });
   });
-  document.querySelector('.menu-toggle').addEventListener('click',()=>{
-    const nav = document.querySelector('.nav-links');
-    const show = nav.style.display !== 'flex';
-    nav.style.cssText = show ? 'display:flex;position:absolute;top:64px;left:0;right:0;background:#fff;flex-direction:column;padding:20px;box-shadow:0 10px 20px rgba(0,0,0,0.05);gap:16px;' : 'display:none;';
+
+  // Mobile menu toggle
+  const menuToggle = document.getElementById('menuToggle');
+  const mobileNav = document.getElementById('mobileNav');
+  menuToggle.addEventListener('click', ()=>{
+    mobileNav.classList.toggle('show');
+  });
+  // Tutup menu saat link diklik
+  mobileNav.querySelectorAll('a').forEach(link=>{
+    link.addEventListener('click', ()=> mobileNav.classList.remove('show'));
+  });
+  // Tutup menu saat klik di luar
+  document.addEventListener('click', (e)=>{
+    if(!menuToggle.contains(e.target) && !mobileNav.contains(e.target)){
+      mobileNav.classList.remove('show');
+    }
   });
 </script>
 </body>
